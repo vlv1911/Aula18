@@ -55,6 +55,8 @@ try:
     print(f'Q2: {q2:.2f}')
     print(f'Q3: {q3:.2f}')
 
+    # menores
+
     
 except Exception as e:
     print(f'Erro ao calcular as informações...')
