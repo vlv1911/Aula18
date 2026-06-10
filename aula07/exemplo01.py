@@ -57,6 +57,20 @@ try:
 
     # menores
 
-    
+    df_roubo_veiculo_menores = df_roubo_veiculo[df_roubo_veiculo['roubo_veiculo'] < q1]
+
+    # maiores
+
+    df_roubo_veiculo_maiores = df_roubo_veiculo[df_roubo_veiculo['roubo_veiculo'] > q3]
+
+    print('\nMunicipios com mais roubos')
+    print(40 * '=')
+    print(df_roubo_veiculo_maiores)
+
+    print('\nMunicipios com mais roubos')
+    print(40 * '=')
+    # ordem decrescente
+    print(df_roubo_veiculo_menores.sort_values(by='roubo_veiculo', ascending=True))
+
 except Exception as e:
     print(f'Erro ao calcular as informações...')
