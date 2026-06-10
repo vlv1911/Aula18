@@ -21,23 +21,26 @@ try:
 
     media_casos_estelionato = np.mean(array_casos_estelionato)
     mediana_casos_estelionato = np.median(array_casos_estelionato)
+    distancia = abs((media_casos_estelionato - mediana_casos_estelionato) / mediana_casos_estelionato * 100)
     total_casos_estelionato = np.sum(array_casos_estelionato)
 
     print('\nTendencias...')                                                        
     print(30*'-')
     print(f'Média de casos: {media_casos_estelionato:.2f}')
     print(f'Mediana de casos: {mediana_casos_estelionato:.2f}')
+    print(f'Distância: {distancia:.2f}%')
     print(f'Total de casos: {total_casos_estelionato}')
 
     q1 = np.quantile(array_casos_estelionato, 0.25)
+    # q1 = np.quantile(array_casos_estelionato, 0.25, method='weibull')
     q2 = np.quantile(array_casos_estelionato, 0.50)
     q3 = np.quantile(array_casos_estelionato, 0.75)
 
     print('\nMedições: ')
     print(30*'-')
-    print(f'Q1: {q1}')
-    print(f'Q2: {q2}')
-    print(f'Q3: {q3}')
+    print(f'Q1: {q1:.2f}')
+    print(f'Q2: {q2:.2f}')
+    print(f'Q3: {q3:.2f}')
 
     df_casos_estelionato_menores = df_casos_estelionato[df_casos_estelionato['estelionato'] < q1]
 
