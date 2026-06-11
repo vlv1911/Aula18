@@ -74,3 +74,79 @@ try:
 
 except Exception as e:
     print(f'Erro ao calcular as informações...')
+
+# Verificando Medidas de dispersão - Amplitude total:
+
+try:
+    # Amplitude Total = meu maior_valor - menor_valor
+    # Quanto mais próximo de zero, maior a homogeneidade dos dados
+    # Se for igual a 0 (zero), todos os dados são iguais
+    # Quanto mais próximo do maior valor, maior a dispersão
+    maximo = np.max(array_roubo_veiculo)
+    minimo = np.min(array_roubo_veiculo)
+    amplitude = maximo - minimo
+
+    print('\nMedidas de dispersão: ')
+    print(25 * '=')
+    print(f'Máximo: {maximo}')
+    print(f'Mínimo: {minimo}')
+    print(f'Amplitude total: {amplitude}')
+    
+except Exception as e:
+    print(f'Erro ao calcular Medidas de dispersão... {e}')
+
+
+# Outliers:
+    
+try:
+    # IQR (Intervalo Interquartil)
+    # É a amplitude dos 50% dos dados mais centrais
+    # IQR = Q3 - Q1
+    # Ele ignora os valores mais extremos, max e min estão fora
+    # Não sofre influência dos extremos
+    # Quanto mais próximo de zero, maior a homogeneidade dos dados
+    # Se for igual a 0 (zero), todos os dados são iguais
+    # Quanto mais próximo do Q3, maior a dispersão
+    iqr = q3 - q1
+
+    # print(f'\nIQR: {iqr}')
+
+    # Limite superior:
+    limite_superior = q3 + (1.5 * iqr)
+      
+    # Limite inferior:
+    limite_inferior = q1 - (1.5 * iqr)
+
+    # Outliers:
+    df_roubo_veiculo_outliers_superiores = df_roubo_veiculo[df_roubo_veiculo['roubo_veiculo'] > limite_superior]
+
+    df_roubo_veiculo_outliers_inferiores = df_roubo_veiculo[df_roubo_veiculo['roubo_veiculo'] < limite_inferior]
+
+    print('\nMedidas: ')
+    print(25 * '=')
+    print(f'Mínimo: {minimo}')
+    print(f'Limite inferior: {limite_inferior}')
+    print(f'Q1: {q1}')
+    print(f'Q2: {q2}')
+    print(f'Q3: {q3}')
+    print(f'IQR: {iqr}')
+    print(f'Limite superior: {limite_superior}')
+    print(f'Máximo: {maximo}')
+    
+    # Printando os Outliers:
+    print('\nOutliers superiores: ')
+    print(50 * '=')
+    if len(df_roubo_veiculo_outliers_superiores) == 0:
+        print('Não existem Outliers superiores')
+    else:
+        print(f'\n{df_roubo_veiculo_outliers_superiores}')
+
+    print('\nOutliers inferiores: ')
+    print(50 * '=')
+    if len(df_roubo_veiculo_outliers_inferiores) == 0:
+        print('Não existem Outliers inferiores')
+    else:
+        print(f'\n{df_roubo_veiculo_outliers_inferiores}')
+    
+except Exception as e:
+    print(f'Erro ao calcular Outliers {e}')
