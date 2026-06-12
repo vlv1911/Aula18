@@ -1,5 +1,11 @@
+# python - venv venv
+# souce ./venv/source/activate
+# pip install pandas numpy
+# pip install matplotlib
+
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # obtendo dados:
 
@@ -150,3 +156,17 @@ try:
     
 except Exception as e:
     print(f'Erro ao calcular Outliers {e}')
+
+
+# Visualizando os dados:
+try:
+    # mostrando cidades com maiores números de roubos
+    plt.figure(figsize=(16, 8))
+    df_roubo_veiculo_outliers_superiores = df_roubo_veiculo_outliers_superiores.sort_values(by='roubo_veiculo', ascending=True) 
+    plt.barh(df_roubo_veiculo_outliers_superiores['munic'], df_roubo_veiculo_outliers_superiores['roubo_veiculo'])
+    plt.title('Cidades com os maiores casos de roubos de veículos:')
+    plt.show()
+
+
+except Exception as e:
+    print(f'Erro ao plotar o gráfico: {e}')
